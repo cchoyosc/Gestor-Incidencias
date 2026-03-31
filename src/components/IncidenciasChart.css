@@ -1,0 +1,12 @@
+.chart-panel {
+  padding: 10px 20px;
+  flex-wrap: wrap;
+}
+
+.pie-wrapper {
+  min-width: 260px;
+}
+
+.bar-wrapper {
+  min-width: 300px;
+}

@@ -1,0 +1,64 @@
+.filter-dropdown {
+  position: relative;
+  display: inline-block;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.filter-btn {
+  background: none;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #444;
+  cursor: pointer;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.filter-btn:hover {
+  color: #e8540a;
+}
+
+.filter-arrow {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.filter-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  min-width: 150px;
+  z-index: 200;
+  padding: 4px 0;
+}
+
+.filter-option {
+  padding: 7px 14px;
+  font-size: 0.8rem;
+  color: #555;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.12s;
+}
+
+.filter-option:hover {
+  background: #f8f8f8;
+}
+
+.filter-option.selected {
+  color: #e8540a;
+  font-weight: 600;
+}
+
+.filter-bullet {
+  font-size: 0.6rem;
+  color: #aaa;
+}

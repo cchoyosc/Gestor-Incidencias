@@ -1,0 +1,39 @@
+.dashboard-root {
+  min-height: 100vh;
+  background: #f5f5f5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dashboard-main {
+  margin-left: 185px;
+  flex: 1;
+  min-height: 100vh;
+  background: #fafafa;
+}
+
+.dashboard-content {
+  padding: 0;
+}
+
+.content-filter {
+  padding-top: 14px;
+}
+
+.section-header {
+  background: white;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+}
+
+.section-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #555;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
+}
