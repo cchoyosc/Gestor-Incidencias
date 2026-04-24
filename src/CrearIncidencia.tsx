@@ -10,6 +10,7 @@ const CrearIncidencia: React.FC = () => {
   const [descripcion, setDescripcion] = useState("");
   const [imagen, setImagen] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
+  const [exito, setExito] = useState(false);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -30,12 +31,20 @@ const CrearIncidencia: React.FC = () => {
 
   const handleCrear = () => {
     if (!titulo || !descripcion) return;
-    // Aquí irá la lógica real de creación
-    navigate("/dashboard");
+    setExito(true);
+    setTimeout(() => {
+      setExito(false);
+      navigate("/login");
+    }, 2000);
   };
 
   return (
     <div className="ci-root">
+      {/* Toast notificación */}
+      {exito && (
+        <div className="ci-toast">✓ Incidencia creada correctamente</div>
+      )}
+
       {/* Header */}
       <div className="ci-page-header">
         <h2 className="ci-page-title">Incidencias</h2>

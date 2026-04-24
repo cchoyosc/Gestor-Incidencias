@@ -8,15 +8,20 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = () => {
+  const handleLoginAdmin = () => {
     if (!email || !password) {
       setError("Por favor completa todos los campos.");
       return;
     }
-    // Aquí irá la lógica real de autenticación
     navigate("/dashboard");
   };
-
+  const handleLoginMante = () => {
+    if (!email || !password) {
+      setError("Por favor completa todos los campos.");
+      return;
+    }
+    navigate("/mantenimiento");
+  };
   return (
     <div className="login-root">
       <div className="login-card">
@@ -64,7 +69,7 @@ const Login: React.FC = () => {
               setPassword(e.target.value);
               setError("");
             }}
-            onKeyDown={(e) => e.key === "Enter" && handleLogin()}
+            onKeyDown={(e) => e.key === "Enter" && handleLoginAdmin()}
           />
         </div>
 
@@ -76,14 +81,10 @@ const Login: React.FC = () => {
           {" "}
           Crear incidencia
         </button>
-        <button
-          className="login-btn"
-          onClick={() => navigate("/mantenimiento")}
-        >
-          {" "}
-          Ingresar como personal de mantenimiento
+        <button className="login-btn" onClick={handleLoginMante}>
+          Ingresar como Area de mantenimiento
         </button>
-        <button className="login-btn" onClick={handleLogin}>
+        <button className="login-btn" onClick={handleLoginAdmin}>
           Ingresar como administrador
         </button>
       </div>
