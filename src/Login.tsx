@@ -71,10 +71,17 @@ const Login: React.FC = () => {
         {error && <p className="login-error">{error}</p>}
         <button
           className="create-ins"
+          onClick={() => navigate("/crear-incidencia")}
+        >
+          {" "}
+          Crear incidencia
+        </button>
+        <button
+          className="login-btn"
           onClick={() => navigate("/mantenimiento")}
         >
           {" "}
-          Crear instancia
+          Ingresar como personal de mantenimiento
         </button>
         <button className="login-btn" onClick={handleLogin}>
           Ingresar como administrador

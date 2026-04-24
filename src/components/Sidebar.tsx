@@ -96,7 +96,6 @@ const Sidebar: React.FC<SidebarProps> = ({ filter, onFilterChange }) => {
             <div className="user-greeting">Bienvenido</div>
             <div className="user-name">(Hombre de usuario)</div>
           </div>
-          <span className="ms-auto sidebar-menu-icon">☰</span>
         </div>
       </div>
 

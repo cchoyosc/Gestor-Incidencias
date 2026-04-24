@@ -3,6 +3,7 @@ import Sidebar from "./components/Sidebar";
 import TopBar from "./components/TopBar";
 import UserDetailModal from "./components/UserDetailModal";
 import EditUserModal from "./components/EditUserModal";
+import CreateUserModal from "./components/CreateUserModal";
 import "./Dashboard.css";
 import { useUsers } from "./hooks/useUsers";
 
@@ -13,12 +14,14 @@ export interface User {
   nombre: string;
   identificacion: string;
   rol: UserRole;
+  password: string;
 }
 
 const Users = () => {
-  const { users, loading, removeUser,editUser  } = useUsers();
-const [editUserData, setEditUserData,] = useState<User | null>(null);
-const [detailUser, setDetailUser] = useState<User | null>(null);
+  const { users, loading, removeUser, editUser, addUser } = useUsers();
+  const [editUserData, setEditUserData] = useState<User | null>(null);
+  const [detailUser, setDetailUser] = useState<User | null>(null);
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
   if (loading) return <p>Cargando...</p>;
 
@@ -26,18 +29,18 @@ const [detailUser, setDetailUser] = useState<User | null>(null);
     removeUser(id);
   };
 
-  //  guardar usando API
   const handleSave = (updated: User) => {
     editUser(updated);
     setEditUserData(null);
   };
+
   return (
     <div className="dashboard-root d-flex">
       <Sidebar />
       <div className="dashboard-main d-flex flex-column">
         <TopBar />
         <div className="dashboard-content flex-grow-1 p-4">
-          <div className="mb-4">
+          <div className="mb-4 d-flex justify-content-between align-items-center">
             <h2
               style={{
                 fontSize: "1.3rem",
@@ -48,6 +51,12 @@ const [detailUser, setDetailUser] = useState<User | null>(null);
             >
               Usuarios
             </h2>
+            <button
+              className="btn-accion editar"
+              onClick={() => setShowCreateModal(true)}
+            >
+              + Crear usuario
+            </button>
           </div>
 
           <div className="tabla-wrapper">
@@ -81,7 +90,7 @@ const [detailUser, setDetailUser] = useState<User | null>(null);
                           Ver
                         </button>
                         <button
-                         className="btn-accion editar"
+                          className="btn-accion editar"
                           onClick={() => setEditUserData(user)}
                         >
                           Editar
@@ -101,19 +110,27 @@ const [detailUser, setDetailUser] = useState<User | null>(null);
           </div>
         </div>
       </div>
-      {/* ✅ modal detalle */}
+
       {detailUser && (
         <UserDetailModal
           user={detailUser}
           onClose={() => setDetailUser(null)}
         />
       )}
-        {/* ✅ modal edición */}
       {editUserData && (
         <EditUserModal
           user={editUserData}
           onClose={() => setEditUserData(null)}
           onSave={handleSave}
+        />
+      )}
+      {showCreateModal && (
+        <CreateUserModal
+          onClose={() => setShowCreateModal(false)}
+          onSave={(newUser) => {
+            addUser(newUser);
+            setShowCreateModal(false);
+          }}
         />
       )}
     </div>
