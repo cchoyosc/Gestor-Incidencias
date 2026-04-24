@@ -12,7 +12,7 @@ export type UserRole = "admin" | "mantenimiento";
 export interface User {
   id: number;
   nombre: string;
-  identificacion: string;
+  contacto: string;
   rol: UserRole;
   password: string;
 }
@@ -33,7 +33,10 @@ const Users = () => {
     editUser(updated);
     setEditUserData(null);
   };
-
+const handleCreate = async (user: any) => {
+  await addUser(user);
+  setShowCreateModal(false);
+};
   return (
     <div className="dashboard-root d-flex">
       <Sidebar />
@@ -65,7 +68,7 @@ const Users = () => {
                 <tr>
                   <th>ID</th>
                   <th>Nombre</th>
-                  <th>Identificación</th>
+                  <th>Contacto</th>
                   <th>Rol</th>
                   <th>Acciones</th>
                 </tr>
@@ -75,7 +78,7 @@ const Users = () => {
                   <tr key={user.id}>
                     <td>{user.id}</td>
                     <td>{user.nombre}</td>
-                    <td>{user.identificacion}</td>
+                    <td>{user.contacto}</td>
                     <td>
                       <span className={`rol-badge ${user.rol}`}>
                         {user.rol}
@@ -112,28 +115,28 @@ const Users = () => {
       </div>
 
       {detailUser && (
-        <UserDetailModal
-          user={detailUser}
-          onClose={() => setDetailUser(null)}
-        />
-      )}
-      {editUserData && (
-        <EditUserModal
-          user={editUserData}
-          onClose={() => setEditUserData(null)}
-          onSave={handleSave}
-        />
-      )}
-      {showCreateModal && (
-        <CreateUserModal
-          onClose={() => setShowCreateModal(false)}
-          onSave={(newUser) => {
-            addUser(newUser);
-            setShowCreateModal(false);
-          }}
-        />
-      )}
-    </div>
+  <UserDetailModal
+    user={detailUser}
+    onClose={() => setDetailUser(null)}
+  />
+)}
+
+{editUserData && (
+  <EditUserModal
+    user={editUserData}
+    onClose={() => setEditUserData(null)}
+    onSave={handleSave}
+  />
+)}
+
+{showCreateModal && (
+  <CreateUserModal
+    onClose={() => setShowCreateModal(false)}
+    onSave={handleCreate}
+  />
+)}
+
+</div>
   );
 };
 

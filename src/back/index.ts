@@ -10,6 +10,23 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.post("/usuarios", async (req, res) => {
+  try {
+    const { nombre, contacto, rol_id } = req.body;
+
+    const result = await pool.query(
+      `INSERT INTO users (nombre, contacto, rol_id)
+       VALUES ($1, $2, $3)
+       RETURNING *`,
+      [nombre, contacto, rol_id]
+    );
+
+    res.status(201).json(result.rows[0]);
+  } catch (error) {
+    res.status(500).json({ message: "Error creando usuario" });
+  }
+});
+
 // Obtener todos los usuarios
 app.get("/usuarios", async (_req: Request, res: Response) => {
   try {
@@ -42,7 +59,7 @@ app.post("/usuarios", async (req: Request, res: Response) => {
   try {
     const { nombre, identificacion, rol } = req.body;
     const result = await pool.query(
-      "INSERT INTO users (nombre, identificacion, rol) VALUES ($1, $2, $3) RETURNING *",
+      "INSERT INTO users (nombre, identificacion, rol_ID) VALUES ($1, $2, $3) RETURNING *",
       [nombre, identificacion, rol]
     );
     res.status(201).json(result.rows[0]);
@@ -55,10 +72,10 @@ app.post("/usuarios", async (req: Request, res: Response) => {
 app.put("/usuarios/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { nombre, identificacion, rol } = req.body;
+    const { nombre, contacto, rol_id} = req.body;
     const result = await pool.query(
-      `UPDATE users SET nombre=$1, identificacion=$2, rol=$3 WHERE id=$4 RETURNING *`,
-      [nombre, identificacion, rol, id]
+      `UPDATE users SET nombre=$1, contacton=$2, rol_id=$3 WHERE id=$4 RETURNING *`,
+      [nombre, contacto, rol_id]
     );
 
     if (result.rows.length === 0) {

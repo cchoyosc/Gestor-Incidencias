@@ -34,11 +34,11 @@ const EditUserModal: React.FC<Props> = ({ user, onClose, onSave }) => {
             />
           </div>
           <div className="modal-field-col">
-            <span className="modal-label">Identificación</span>
+            <span className="modal-label">Contacto"</span>
             <input
               className="modal-input"
-              value={form.identificacion}
-              onChange={(e) => handleChange("identificacion", e.target.value)}
+              value={form.contacto}
+              onChange={(e) => handleChange("contacto", e.target.value)}
             />
           </div>
           <div className="modal-field-col">

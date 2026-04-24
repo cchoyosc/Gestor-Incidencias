@@ -14,7 +14,7 @@ export const getUsers = async () => {
 export const createUser = async (user: {
   nombre: string;
   identificacion: string;
-  rol: string;
+  rol_ID: string;
 }) => {
   const res = await API.post("/usuarios", user);
   return res.data;

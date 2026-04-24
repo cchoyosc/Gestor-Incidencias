@@ -9,20 +9,21 @@ interface Props {
 
 const CreateUserModal: React.FC<Props> = ({ onClose, onSave }) => {
   const [nombre, setNombre] = useState("");
-  const [identificacion, setIdentificacion] = useState("");
+  const [contacto, setContacto] = useState("");
   const [rol, setRol] = useState<UserRole>("mantenimiento");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = () => {
-    if (!nombre.trim() || !identificacion.trim() || !password.trim()) return;
-    onSave({
-      id: Date.now(),
-      nombre,
-      identificacion,
-      rol,
-      password,
-    });
-  };
+const handleSubmit = () => {
+  if (!nombre.trim() || !contacto.trim() || !password.trim()) return;
+
+  onSave({
+    nombre,
+    contacto,
+    rol,
+  } as any);
+
+  onClose();
+};
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -44,14 +45,14 @@ const CreateUserModal: React.FC<Props> = ({ onClose, onSave }) => {
             />
           </div>
           <div className="modal-field">
-            <span className="modal-label">Identificación</span>
-            <input
-              className="modal-input"
-              value={identificacion}
-              onChange={(e) => setIdentificacion(e.target.value)}
-              placeholder="Número de identificación"
-            />
-          </div>
+  <span className="modal-label">Contacto</span>
+  <input
+    className="modal-input"
+    value={contacto}
+    onChange={(e) => setContacto(e.target.value)}
+    placeholder="Número de contacto"
+  />
+</div>
           <div className="modal-field">
             <span className="modal-label">Contraseña</span>
             <input

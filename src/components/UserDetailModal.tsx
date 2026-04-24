@@ -28,11 +28,13 @@ const UserDetailModal: React.FC<Props> = ({ user, onClose }) => {
           </div>
           <div className="modal-field">
             <span className="modal-label">Identificación</span>
-            <span className="modal-value">{user.identificacion}</span>
+            <span className="modal-value">{user.contacto}</span>
           </div>
           <div className="modal-field">
             <span className="modal-label">Rol</span>
-            <span className={`modal-badge ${user.rol}`}>{user.rol}</span>
+            <span className={`modal-badge ${user.rol}`}>
+  {user.rol}
+</span>
           </div>
         </div>
       </div>

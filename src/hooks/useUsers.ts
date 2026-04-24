@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import {
   getUsers,
-  createUser,
   updateUser,
   deleteUser,
 } from "../service/api";
-
+import axios from "axios";
 export const useUsers = () => {
   const [users, setUsers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -25,17 +24,39 @@ export const useUsers = () => {
     loadUsers();
   }, []);
 
-  const addUser = async (user: any) => {
-    const newUser = await createUser(user);
-    setUsers((prev) => [...prev, newUser]);
-  };
+ const addUser = async (user: any) => {
+  try {
+    const res = await axios.post("http://localhost:3000/usuarios", {
+      nombre: user.nombre,
+      contacto: user.contacto,
+      rol_id: user.rol === "admin" ? "R1" : "R2",
+    });
 
+    setUsers((prev) => [...prev, res.data]);
+
+  } catch (error) {
+    console.error("ERROR BACKEND:", error);
+  }
+};
   const editUser = async (user: any) => {
-    const updated = await updateUser(user.id, user);
-    setUsers((prev) =>
-      prev.map((u) => (u.id === updated.id ? updated : u))
+  try {
+    const res = await axios.put(
+      `http://localhost:3000/usuarios/${user.id}`,
+      {
+        nombre: user.nombre,
+        contacto: user.contacto,
+        rol_id: user.rol === "admin" ? "R1" : "R2",
+      }
     );
-  };
+
+    setUsers((prev) =>
+      prev.map((u) => (u.id === user.id ? res.data : u))
+    );
+
+  } catch (error) {
+    console.error("Error actualizando:", error);
+  }
+};
 
   const removeUser = async (id: number) => {
     await deleteUser(id);
