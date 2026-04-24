@@ -104,11 +104,6 @@ const Sidebar: React.FC<SidebarProps> = ({ filter, onFilterChange }) => {
       <nav className="sidebar-nav px-2 flex-grow-1">
         <div className="nav-section-label px-2 mb-1">Dashboards</div>
         <NavItem
-          label="Home"
-          icon="🏠"
-          onClick={() => navigate("/dashboard")}
-        />
-        <NavItem
           label="Incidencias"
           icon="⚑"
           active={true}

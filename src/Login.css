@@ -86,7 +86,20 @@
   color: #e8540a;
   margin: 0 0 12px;
 }
-
+.create-ins {
+  width: 100%;
+  padding: 11px;
+  background-color: #ff0909;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s;
+  font-family: "Segoe UI", sans-serif;
+  margin-top: 4px;
+}
 .login-btn {
   width: 100%;
   padding: 11px;

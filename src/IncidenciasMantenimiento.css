@@ -1,0 +1,272 @@
+.im-breadcrumb {
+  font-size: 0.8rem;
+  color: #888;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.im-breadcrumb-sep {
+  color: #ccc;
+}
+
+.im-breadcrumb-active {
+  color: #e8540a;
+  font-weight: 600;
+}
+
+.im-filtro-titulo {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 14px 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #333;
+  letter-spacing: 1px;
+  text-align: center;
+  width: 100%;
+}
+
+.im-tabla-wrapper {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #f0f0f0;
+  overflow: hidden;
+  margin-top: 16px;
+  width: 100%;
+}
+
+.im-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.im-tabla thead tr {
+  background: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.im-tabla th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #555;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.im-tabla td {
+  padding: 13px 16px;
+  color: #333;
+  border-bottom: 1px solid #f9f9f9;
+}
+
+.im-tabla tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.im-tabla tbody tr:hover {
+  background: #fafafa;
+}
+
+.im-fila-seleccionada {
+  background: #fff5f0 !important;
+}
+
+.im-checkbox {
+  accent-color: #e8540a;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.im-btn-ver {
+  padding: 5px 14px;
+  border: 1.5px solid #333;
+  border-radius: 6px;
+  background: transparent;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #333;
+  transition: all 0.15s;
+}
+
+.im-btn-ver:hover {
+  background: #333;
+  color: #fff;
+}
+
+.im-empty {
+  text-align: center;
+  color: #aaa;
+  padding: 32px;
+  font-size: 0.85rem;
+}
+
+.im-acciones-barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding: 10px 16px;
+  background: #fff5f0;
+  border: 1px solid #f5d0c0;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #e8540a;
+  font-weight: 600;
+}
+
+.im-btn-accion {
+  padding: 6px 14px;
+  border: 1.5px solid #e8540a;
+  border-radius: 6px;
+  background: transparent;
+  color: #e8540a;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.im-btn-accion:hover {
+  background: #e8540a;
+  color: #fff;
+}
+
+.im-detalle-panel {
+  margin-top: 16px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.im-detalle-body {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.im-detalle-izq {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  border-right: 1px solid #e0e0e0;
+  width: 45%;
+}
+
+.im-detalle-der {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  flex: 1;
+}
+
+.im-detalle-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.im-detalle-imagen {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: #f0f0f0;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.im-detalle-imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.im-detalle-imagen-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.im-detalle-descripcion {
+  font-size: 0.875rem;
+  color: #444;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.im-detalle-acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 20px;
+  background: #fafafa;
+}
+
+.im-btn-espera {
+  padding: 10px 24px;
+  border: 2px solid #333;
+  border-radius: 8px;
+  background: transparent;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #333;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: "Segoe UI", sans-serif;
+  transition: background 0.15s;
+}
+
+.im-btn-espera:hover {
+  background: #f0f0f0;
+}
+
+.im-btn-cerrar {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  background: #333;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: "Segoe UI", sans-serif;
+  transition: background 0.15s;
+}
+
+.im-btn-cerrar:hover {
+  background: #111;
+}
+
+.modal-badge.nuevas {
+  background: #fff5f0;
+  color: #e8540a;
+}
+
+.modal-badge.cerradas {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.modal-badge.pendientes {
+  background: #fef9c3;
+  color: #854d0e;
+}
