@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
+import { loginUser } from "./service/api";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -8,24 +9,31 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLoginAdmin = () => {
+  const handleLogin = async () => {
     if (!email || !password) {
       setError("Por favor completa todos los campos.");
       return;
     }
-    navigate("/dashboard");
-  };
-  const handleLoginMante = () => {
-    if (!email || !password) {
-      setError("Por favor completa todos los campos.");
-      return;
+    try {
+      const { user } = await loginUser(email, password);
+      localStorage.setItem("userName", user.nombre);
+      localStorage.setItem("userRol", user.rol_id);
+
+      if (user.rol_id === "R1") {
+        navigate("/dashboard");
+      } else if (user.rol_id === "R4") {
+        navigate("/mantenimiento");
+      } else {
+        setError("Rol no reconocido.");
+      }
+    } catch {
+      setError("Correo o contraseña incorrectos.");
     }
-    navigate("/mantenimiento");
   };
+
   return (
     <div className="login-root">
       <div className="login-card">
-        {/* Logo */}
         <div className="login-logo">
           <svg width="40" height="40" viewBox="0 0 36 36" fill="none">
             <circle cx="12" cy="12" r="6" fill="#e8540a" opacity="0.9" />
@@ -69,23 +77,20 @@ const Login: React.FC = () => {
               setPassword(e.target.value);
               setError("");
             }}
-            onKeyDown={(e) => e.key === "Enter" && handleLoginAdmin()}
+            onKeyDown={(e) => e.key === "Enter" && handleLogin()}
           />
         </div>
 
         {error && <p className="login-error">{error}</p>}
+
         <button
           className="create-ins"
           onClick={() => navigate("/crear-incidencia")}
         >
-          {" "}
           Crear incidencia
         </button>
-        <button className="login-btn" onClick={handleLoginMante}>
-          Ingresar como Area de mantenimiento
-        </button>
-        <button className="login-btn" onClick={handleLoginAdmin}>
-          Ingresar como administrador
+        <button className="login-btn" onClick={handleLogin}>
+          Ingresar
         </button>
       </div>
     </div>

@@ -9,7 +9,15 @@ interface Props {
 }
 
 const EditUserModal: React.FC<Props> = ({ user, onClose, onSave }) => {
-  const [form, setForm] = useState<User>({ ...user });
+  const rolMap: Record<string, UserRole> = {
+    R1: "Admin",
+    R4: "Mantenimiento",
+  };
+
+  const [form, setForm] = useState<User>({
+    ...user,
+    rol: rolMap[user.rol_id as any] ?? user.rol,
+  });
 
   const handleChange = (field: keyof User, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -34,7 +42,7 @@ const EditUserModal: React.FC<Props> = ({ user, onClose, onSave }) => {
             />
           </div>
           <div className="modal-field-col">
-            <span className="modal-label">Contacto"</span>
+            <span className="modal-label">Contacto</span>
             <input
               className="modal-input"
               value={form.contacto}
@@ -48,8 +56,8 @@ const EditUserModal: React.FC<Props> = ({ user, onClose, onSave }) => {
               value={form.rol}
               onChange={(e) => handleChange("rol", e.target.value as UserRole)}
             >
-              <option value="admin">admin</option>
-              <option value="mantenimiento">mantenimiento</option>
+              <option value="Admin">Admin</option>
+              <option value="Mantenimiento">Mantenimiento</option>
             </select>
           </div>
           <div className="modal-actions">

@@ -7,14 +7,17 @@ import CreateUserModal from "./components/CreateUserModal";
 import "./Dashboard.css";
 import { useUsers } from "./hooks/useUsers";
 
-export type UserRole = "admin" | "mantenimiento";
+export type UserRole = "Admin" | "Mantenimiento";
 
 export interface User {
+  email: string;
+  rol_id: string;
   id: number;
   nombre: string;
   contacto: string;
   rol: UserRole;
   password: string;
+  activo: boolean;
 }
 
 const Users = () => {
@@ -22,7 +25,8 @@ const Users = () => {
   const [editUserData, setEditUserData] = useState<User | null>(null);
   const [detailUser, setDetailUser] = useState<User | null>(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
-
+  const activeUsers = users.filter((u) => u.activo === true);
+  const [confirmUser, setConfirmUser] = useState<User | null>(null);
   if (loading) return <p>Cargando...</p>;
 
   const handleDelete = (id: number) => {
@@ -33,10 +37,12 @@ const Users = () => {
     editUser(updated);
     setEditUserData(null);
   };
-const handleCreate = async (user: any) => {
-  await addUser(user);
-  setShowCreateModal(false);
-};
+  const handleCreate = async (user: any) => {
+    const ok = await addUser(user);
+    console.log("✅ ok recibido:", ok);
+    return ok;
+  };
+
   return (
     <div className="dashboard-root d-flex">
       <Sidebar />
@@ -69,19 +75,21 @@ const handleCreate = async (user: any) => {
                   <th>ID</th>
                   <th>Nombre</th>
                   <th>Contacto</th>
+                  <th>Email</th>
                   <th>Rol</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                {users.map((user) => (
+                {activeUsers.map((user) => (
                   <tr key={user.id}>
                     <td>{user.id}</td>
                     <td>{user.nombre}</td>
                     <td>{user.contacto}</td>
+                    <td>{user.email}</td>
                     <td>
-                      <span className={`rol-badge ${user.rol}`}>
-                        {user.rol}
+                      <span className={`rol-badge ${user.rol_id}`}>
+                        {user.rol_id === "R1" ? "Admin" : "Mantenimiento"}
                       </span>
                     </td>
                     <td>
@@ -100,10 +108,65 @@ const handleCreate = async (user: any) => {
                         </button>
                         <button
                           className="btn-accion eliminar"
-                          onClick={() => handleDelete(user.id)}
+                          onClick={() => setConfirmUser(user)}
                         >
                           Eliminar
                         </button>
+                        {confirmUser && (
+                          <div
+                            className="modal-overlay"
+                            onClick={() => setConfirmUser(null)}
+                          >
+                            <div
+                              className="modal-card"
+                              onClick={(e) => e.stopPropagation()}
+                              style={{ maxWidth: 380 }}
+                            >
+                              <div className="modal-header">
+                                <span className="modal-title">
+                                  Confirmar eliminacion
+                                </span>
+                                <button
+                                  className="modal-close"
+                                  onClick={() => setConfirmUser(null)}
+                                >
+                                  ✕
+                                </button>
+                              </div>
+                              <div className="modal-body">
+                                <p style={{ margin: 0, color: "#333" }}>
+                                  ¿Estás seguro que deseas{" "}
+                                  <strong>{"ELIMINAR"}</strong> a{" "}
+                                  <strong>{confirmUser.nombre}</strong>?
+                                </p>
+                              </div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "flex-end",
+                                  gap: 8,
+                                  padding: "0 1.2rem 1.2rem",
+                                }}
+                              >
+                                <button
+                                  className="btn-accion ver"
+                                  onClick={() => setConfirmUser(null)}
+                                >
+                                  Cancelar
+                                </button>
+                                <button
+                                  className="btn-accion eliminar"
+                                  onClick={() => {
+                                    handleDelete(confirmUser.id);
+                                    setConfirmUser(null);
+                                  }}
+                                >
+                                  Confirmar
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </td>
                   </tr>
@@ -115,28 +178,27 @@ const handleCreate = async (user: any) => {
       </div>
 
       {detailUser && (
-  <UserDetailModal
-    user={detailUser}
-    onClose={() => setDetailUser(null)}
-  />
-)}
+        <UserDetailModal
+          user={detailUser}
+          onClose={() => setDetailUser(null)}
+        />
+      )}
 
-{editUserData && (
-  <EditUserModal
-    user={editUserData}
-    onClose={() => setEditUserData(null)}
-    onSave={handleSave}
-  />
-)}
+      {editUserData && (
+        <EditUserModal
+          user={editUserData}
+          onClose={() => setEditUserData(null)}
+          onSave={handleSave}
+        />
+      )}
 
-{showCreateModal && (
-  <CreateUserModal
-    onClose={() => setShowCreateModal(false)}
-    onSave={handleCreate}
-  />
-)}
-
-</div>
+      {showCreateModal && (
+        <CreateUserModal
+          onClose={() => setShowCreateModal(false)}
+          onSave={handleCreate}
+        />
+      )}
+    </div>
   );
 };
 

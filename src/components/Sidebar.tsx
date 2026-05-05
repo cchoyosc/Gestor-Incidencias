@@ -17,7 +17,7 @@ interface NavItemProps {
   onChildSelect?: (val: string) => void;
   onClick?: () => void;
 }
-
+const userName = localStorage.getItem("userName") ?? "Usuario";
 const NavItem: React.FC<NavItemProps> = ({
   label,
   icon,
@@ -94,7 +94,7 @@ const Sidebar: React.FC<SidebarProps> = ({ filter, onFilterChange }) => {
           <span className="user-dot">●</span>
           <div>
             <div className="user-greeting">Bienvenido</div>
-            <div className="user-name">(Hombre de usuario)</div>
+            <div className="user-name">{userName}</div>
           </div>
         </div>
       </div>
@@ -112,7 +112,7 @@ const Sidebar: React.FC<SidebarProps> = ({ filter, onFilterChange }) => {
           onClick={() => navigate("/dashboard")}
         />
         <NavItem
-          label="Usuários"
+          label="Usuarios"
           icon="👥"
           onClick={() => navigate("/usuarios")}
         />

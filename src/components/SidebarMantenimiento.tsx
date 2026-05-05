@@ -16,7 +16,7 @@ const SidebarMantenimiento: React.FC<SidebarMantenimientoProps> = ({
 }) => {
   const navigate = useNavigate();
   const [incidenciasOpen, setIncidenciasOpen] = useState(true);
-
+  const userName = localStorage.getItem("userName") ?? "Usuario";
   return (
     <div className="sidebar d-flex flex-column">
       {/* Logo */}
@@ -47,7 +47,7 @@ const SidebarMantenimiento: React.FC<SidebarMantenimientoProps> = ({
           <span className="user-dot">●</span>
           <div>
             <div className="user-greeting">Bienvenido</div>
-            <div className="user-name">(Hombre de usuario)</div>
+            <div className="user-name">{userName}</div>
           </div>
           <span className="ms-auto sidebar-menu-icon">☰</span>
         </div>
